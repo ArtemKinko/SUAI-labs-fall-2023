@@ -74,5 +74,8 @@ all_words, spam_words, ham_words = create_spam_table("spam-data.csv")
 check_spam("Thanks for your subscription to mobile app", all_words, spam_words, ham_words, 2)
 check_spam("You are winner! You won 1000 cash prize", all_words, spam_words, ham_words, 2)
 check_spam("Hey, honey, don't forget to buy milk!", all_words, spam_words, ham_words, 2)
+check_spam("Artem, your mark for homework is A+, well done!", all_words, spam_words, ham_words, 2)
 check_spam("23423 2dfs sf23r df 23!", all_words, spam_words, ham_words, 2)
+# "spam","This is the 2nd time we have tried 2 contact u. U have won the £750 Pound prize. 2 claim is easy, call 087187272008 NOW1! Only 10p per minute. BT-national-rate."
+check_spam("This is the 2nd time we have tried 2 contact u. U have won the £750 Pound prize. 2 claim is easy, call 087187272008 NOW1! Only 10p per minute. BT-national-rate", all_words, spam_words, ham_words, 2)
 check_spam("abc dbhd pbdcv oqiewdf iijdcoqwd oqihwdok[ nsoihjdo hjodj", all_words, spam_words, ham_words, 2)

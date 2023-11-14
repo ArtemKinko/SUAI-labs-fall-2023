@@ -173,8 +173,6 @@ def solve(criteria_table_path, number_of_criterias):
     print(tabulate(total, names_for_table_criteria, 'grid'))
     print("Согласно МАИ, лучшая альтернатива:", alternative_names[result.index(max(result)) + 1])
 
-    print()
-
     print("Согласно МАИ+, лучшая альтернатива:", alternative_names[globs.index(max(globs)) + 1])
 
 
