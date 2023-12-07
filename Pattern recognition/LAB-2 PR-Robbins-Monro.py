@@ -30,7 +30,7 @@ def get_g_fun(data_list):
             math.sin(3 * data_list[4])]
 
 
-def robbins_step(g_list, e_list, data_set, current_step, is_1_done, is_2_done):
+def robbins_step(g_list, e_list, data_set, current_step, is_1_done, is_2_done, cond_1, cond_2):
     current_g = get_g_fun(data_set[current_step])
     g_list.append(current_g)
     if current_step == 0:
@@ -52,12 +52,14 @@ def robbins_step(g_list, e_list, data_set, current_step, is_1_done, is_2_done):
             first_condition = max([abs(e_list[current_step][i] - e_list[current_step - 1][i]) for i in range(5)])
             print("По критерию 1:", first_condition, ("<= 0.01 - условие не выполняется" if first_condition > 0.01
                                                       else "<= 0.01 - условие выполняется."))
+            cond_1.append(first_condition)
         else:
             first_condition = 0
         if not is_2_done:
             second_condition = math.sqrt(sum([pow(e_list[current_step][i] - e_list[current_step - 1][i], 2) for i in range(5)]))
             print("По критерию 2:", second_condition, ("<= 0.01 - условие не выполняется" if second_condition > 0.01
                                                        else "<= 0.01 - условие выполняется."))
+            cond_2.append(second_condition)
         else:
             second_condition = 0
 
@@ -65,16 +67,25 @@ def robbins_step(g_list, e_list, data_set, current_step, is_1_done, is_2_done):
             if second_condition <= 0.01:
                 return
             else:
-                robbins_step(g_list, e_list, data_set, current_step + 1, True, False)
+                robbins_step(g_list, e_list, data_set, current_step + 1, True, False, cond_1, cond_2)
         else:
-            robbins_step(g_list, e_list, data_set, current_step + 1, False, False)
+            robbins_step(g_list, e_list, data_set, current_step + 1, False, False, cond_1, cond_2)
 
     else:
-        robbins_step(g_list, e_list, data_set, current_step + 1, False, False)
+        robbins_step(g_list, e_list, data_set, current_step + 1, False, False, cond_1, cond_2)
 
 
 data = load_data("LAB-2_Data.txt", 12)
-g, e = [], []
+g, e, c1, c2 = [], [], [], []
 print(tabulate.tabulate(data))
 
-robbins_step(e, g, data, 0, False, False)
+robbins_step(e, g, data, 0, False, False, c1, c2)
+
+x = list(range(len(c1)))
+plt.plot(x, c1, marker='o')
+plt.plot(x, c2, marker='o')
+plt.plot(x, [0.01 for _ in range(len(c1))])
+plt.title("Условия насыщенности")
+plt.legend(["Расстояние Чебышева", "Евклидово расстояние", "Пороговое значение"])
+
+plt.show()
