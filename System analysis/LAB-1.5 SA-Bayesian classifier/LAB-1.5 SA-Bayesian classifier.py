@@ -2,8 +2,6 @@
 import io
 import math
 import string
-from functools import reduce
-import operator
 
 spam_table = dict()
 

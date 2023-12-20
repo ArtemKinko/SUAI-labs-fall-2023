@@ -1,6 +1,8 @@
 # Вариант 12
 import math
 
+import matplotlib.pyplot as plt
+
 lamb = 1.35
 tau = 0.5
 
@@ -15,8 +17,11 @@ t = 365
 def calculate_money_cost():
     rho = lamb / tau
     money_costs = []
+    x = []
+    m = []
     print("Интенсивность нагрузки", rho)
     for s in range(1, 10):
+        x.append(s)
         print("\n------ Для", s, 'кассиров')
         p_0 = pow(sum([pow(rho, k) / math.factorial(k) for k in range(s + 1)]) + (pow(rho, s + 1) / math.factorial(s) / (s - rho)), -1)
         print("Доля времени простоя узла расчета:", p_0)
@@ -28,7 +33,16 @@ def calculate_money_cost():
         print("Среднее число занятых кассиров:", m_2)
         i = c_ef * c_1 * s + c_2 * m_2 + c_3 * (s - m_2) + c_4 * m_1 * t
         print("Затраты:", i)
+        m.append(i)
         money_costs.append(i)
+    print(x)
+    print(m)
+    fig, ax = plt.subplots()
+    ax.plot(x, m)
+    ax.plot([1, 9], [0, 0], color="red")
+    ax.set_ylabel('Затраты')
+    ax.set_xlabel('Количество кассиров')
+    plt.show()
 
 
 calculate_money_cost()

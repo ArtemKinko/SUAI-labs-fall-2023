@@ -1,9 +1,4 @@
-import math
 import matplotlib.pyplot as plt
-
-import tabulate
-from matplotlib import cm
-
 
 # Вариант №8
 
@@ -17,9 +12,6 @@ from matplotlib import cm
 # s, r, b = 10, 28, 8/3
 # 2. Построить фазовые портреты (x, y, z) для случаев п.1^0 с разной степенью точности вычисления:
 # (2 или 15 знаков в мантиссе)
-
-# 3. Привести примеры практического применения модели Лоренца
-# 4. Дать определение устойчивой и неустойчивой динамической системы
 
 def calculate_lorenz(x_start, y_start, z_start, s, r, b, iter_num, dt, precision):
     x = [x_start]
@@ -67,7 +59,7 @@ x_s, y_s, z_s = 1, -1, 10
 s_s, r_s, b_s = 10, 28, 8/3
 cycles = 10000
 dt_s = 0.01
-precision_s = 2
+precision_s = 15
 x_data, y_data, z_data = calculate_lorenz(x_s, y_s, z_s, s_s, r_s, b_s, cycles, dt_s, precision_s)
 print(x_data)
 print(y_data)
